@@ -1,0 +1,59 @@
+<!-- 
+<div class="language-selector">
+  <select class="custom-select" (change)="changeLanguage($event)">
+    <option *ngFor="let lang of languages" [value]="lang" [selected]="lang === translate.currentLang">{{ lang | uppercase }}</option>
+  </select>
+</div>
+<div class="container mx-auto py-12 px-6">
+    <h2 class="text-3xl font-extrabold text-center mb-6">{{'TITLE'|translate}}</h2>
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+      <div class="border-b">
+        <div class="p-6 cursor-pointer" (click)="toggleFAQ(0)">
+          <h3 class="text-lg font-semibold">{{ 'Q1'|translate }}</h3>
+        </div>
+        <div *ngIf="faqs[0].isOpen" class="p-6 bg-gray-100">
+          <p>{{ 'A1'|translate }}</p>
+        </div>
+      </div>
+      
+      <div class="border-b">
+        <div class="p-6 cursor-pointer" (click)="toggleFAQ(1)">
+          <h3 class="text-lg font-semibold">{{ 'Q2'|translate }}</h3>
+        </div>
+        <div *ngIf="faqs[1].isOpen" class="p-6 bg-gray-100">
+          <p>{{ 'A2'|translate }}</p>
+        </div>
+      </div>
+      
+      <div class="border-b">
+        <div class="p-6 cursor-pointer" (click)="toggleFAQ(2)">
+          <h3 class="text-lg font-semibold">{{ 'Q3'|translate }}</h3>
+        </div>
+        <div *ngIf="faqs[2].isOpen" class="p-6 bg-gray-100">
+          <p>{{ 'A3'|translate }}</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+   -->
+   
+   <app-spinner *ngIf="dataLoading" ></app-spinner>
+ 
+
+
+<div *ngIf="!dataLoading"  class="container mx-auto py-12 px-6">
+  <h2 class="text-3xl font-extrabold text-center mb-6">
+    {{ 'TITLE'|translate }}
+  </h2>
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div *ngFor="let faq of translate.instant('FAQS'); let i = index" class="border-b">
+      <div class="p-6 cursor-pointer" (click)="toggleFAQ(i)">
+        <h3 class="text-lg font-semibold">{{ faq.QUESTION | translate }}</h3>
+      </div>
+      <div *ngIf="isOpen.has('Q'+i)&& isOpen.get('Q'+i)"  class="p-6 bg-gray-100">
+        <p>{{ faq.ANSWER | translate }}</p>
+      </div>
+    </div>
+  </div>
+</div>
